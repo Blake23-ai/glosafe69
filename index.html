@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GloSafe</title>
+  <style>
+    body { margin:0; font-family:Arial, sans-serif; background:#000; color:#0f0; }
+    header { display:flex; justify-content:space-between; align-items:center; padding:20px; background:#000; }
+    header img { height:80px; }
+    .container { padding:20px; max-width:900px; margin:auto; }
+    h2 { color:#0f0; }
+    .card { background:#111; padding:20px; border-radius:10px; margin-bottom:20px; box-shadow:0 0 15px #0f0; }
+    video { width:100%; max-width:500px; border-radius:10px; }
+    button { padding:10px 20px; background:#0f0; border:none; color:#000; font-weight:bold; cursor:pointer; border-radius:6px; }
+    button:hover { background:#7fff00; }
+    input, select { padding:8px; width:100%; margin-top:8px; margin-bottom:12px; border-radius:6px; border:none; }
+    .hidden { display:none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 style="color:#0f0; text-shadow:0 0 12px #0f0;">GloSafe</h1>
+    <img src="logo.png" alt="GloSafe Logo" />
+  </header>
+
+  <div class="container">
+
+    <h2>Advertisement</h2>
+    <div class="card">
+      <video id="adVideo" controls playsinline>
+        <source src="Ad.mov" type="video/quicktime" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <h2>Customize Your Arm Cuff</h2>
+    <div class="card">
+      <label>Choose Color:</label>
+      <select id="color">
+        <option>Green</option>
+        <option>Yellow</option>
+        <option>Pink</option>
+      </select>
+
+      <label>Diameter Size:</label>
+      <select id="size">
+        <option>3 inches</option>
+        <option>4 inches</option>
+        <option>5 inches</option>
+      </select>
+
+      <label>Embroidery (optional, max 20 letters):</label>
+      <input id="emb" maxlength="20" placeholder="Enter embroidery text" />
+
+      <button onclick="openCheckout()">Place Order</button>
+    </div>
+
+
+    <h2>Materials</h2>
+    <div class="card">
+      <p>Our GloSafe arm cuffs are made from durable glow-in-the-dark TPU material.
+      TPU provides flexibility, strength, and long-lasting glow performance, ensuring
+      the band stays lightweight and comfortable while offering high visibility in
+      dark environments. The embroidery option will use black stickers created on a
+      Cricut machine.</p>
+    </div>
+
+    <h2>The Cuff's Purpose</h2>
+    <div class="card">
+      <p>Our glow-in-the-dark arm bands are designed to ensure safety for humans
+      while performing daily tasks where darkness increases the risk of injury.
+      These stylish bands are fully customizable in color, size, shape, and
+      embroidery to guarantee maximum satisfaction for each customer. GloSafe's
+      inventory arm cuffs are ideal for anyone concerned with home and nighttime
+      safety, such as parents and guardians, as well as those needing visibility
+      while exercising—like athletes and trainers—when light is limited.</p>
+    </div>
+
+  </div>
+
+  <!-- Checkout Modal -->
+  <div id="checkout" class="card hidden" style="position:fixed; top:10%; left:50%; transform:translateX(-50%); width:90%; max-width:500px; z-index:999; background:#000;">
+    <h2>Checkout</h2>
+    <p id="totalText"></p>
+    <input id="first" placeholder="First Name" />
+    <input id="last" placeholder="Last Name" />
+    <input id="email" placeholder="Email Address" />
+    <input id="addr" placeholder="Home Address" />
+    <select id="country">
+      <option>United States</option>
+      <option>United Kingdom</option>
+      <option>Canada</option>
+    </select>
+    <button onclick="submitOrder()">Submit Order</button>
+    <button onclick="closeCheckout()" style="margin-top:10px; background:#333; color:#0f0;">Cancel</button>
+  </div>
+
+  <script>
+    function openCheckout() {
+      const emb = document.getElementById('emb').value.trim();
+      const total = emb.length > 0 ? 20 : 15;
+      document.getElementById('totalText').innerText = `Your total today will be $${total}`;
+      document.getElementById('checkout').classList.remove('hidden');
+    }
+
+    function closeCheckout() {
+      document.getElementById('checkout').classList.add('hidden');
+    }
+
+    function submitOrder() {
+      const emb = document.getElementById('emb').value.trim();
+      const total = emb.length > 0 ? 20 : 15;
+      alert(`Your total will be $${total}. Thank you for your order!`);
+      closeCheckout();
+    }
+  </script>
+
+</body>
+</html>
